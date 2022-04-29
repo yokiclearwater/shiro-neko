@@ -21,7 +21,7 @@ module.exports = {
                 color: highestRoleColor,
                 author: {
                     name: `${guildUser.user.tag}`,
-                    icon_url: `${normalUser.avatarURL()}`,
+                    icon_url: `${normalUser.avatarURL({dynamic: true})}`,
                 },
                 image: {
                     url: userProfileURL,
