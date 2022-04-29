@@ -1,27 +1,43 @@
 const { SlashCommandBuilder } = require('@discordjs/builders');
+const { MessageEmbed } = require('discord.js');
 
 module.exports = {
 	data: new SlashCommandBuilder()
 		.setName('avatar')
 		.setDescription('Show Avatar')
-		.addUserOption(option => option.setName('user').setDescription('Enter User').setRequired(true)),
+		.addUserOption(option => option.setName('user').setDescription('Input User')),
 	async execute(interaction) {
-		const guildUser = interaction.options.getMember('user'); 
-		const highestRoleColor = interaction.options.getMember('user').roles.highest.color;
-		const imageURL = guildUser.avatarURL({dynamic: true, size: 512}) || interaction.options.getUser('user').avatarURL({dynamic: true, size: 512});
-		await interaction.reply({
-  			"embeds": [
-  			  {
-				"title": "Avatar",
-  			    "color": highestRoleColor,
-  			    "author": {
-  			      "name": `${guildUser.user.tag}`
-  			    },
-				"image": {
-					"url": imageURL,
-				}
-  			  }
-  			],
-		});
+		const guildUser = interaction.options.getMember('user') || interaction.member; 
+		const normalUser = interaction.options.getUser('user') || interaction.user;
+
+		const highestRoleColor = guildUser.roles.highest.color;
+		const serverProfileURL = guildUser.avatarURL({dynamic: true, size: 512});
+		const userProfileURL = normalUser.avatarURL({dynamic: true, size: 512});
+		const serverEmbed = new MessageEmbed({
+			title: "User Avatar",
+			color: highestRoleColor,
+			author: {
+				name: `${guildUser.user.tag}`,
+				icon_url: serverProfileURL,
+			},
+			image: {
+				url: serverProfileURL,
+			}
+		})
+		const userEmbed = new MessageEmbed(serverEmbed).setTitle('Server Avatar').setImage(userProfileURL).setAuthor({name: `${guildUser.user.tag}`, iconURL: userProfileURL});
+		
+		if(serverProfileURL) {
+			await interaction.reply({
+				"embeds": [
+				  serverEmbed, userEmbed
+				],
+		  });
+		} else {
+			await interaction.reply({
+				"embeds": [
+				  userEmbed
+				],
+		  });
+		}
 	},
 };
