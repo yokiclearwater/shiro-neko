@@ -14,7 +14,7 @@ module.exports = {
 		const serverProfileURL = guildUser.avatarURL({dynamic: true, size: 512});
 		const userProfileURL = normalUser.avatarURL({dynamic: true, size: 512});
 		const serverEmbed = new MessageEmbed({
-			title: "User Avatar",
+			title: "Server Avatar",
 			color: highestRoleColor,
 			author: {
 				name: `${guildUser.user.tag}`,
@@ -24,7 +24,7 @@ module.exports = {
 				url: serverProfileURL,
 			}
 		})
-		const userEmbed = new MessageEmbed(serverEmbed).setTitle('Server Avatar').setImage(userProfileURL).setAuthor({name: `${guildUser.user.tag}`, iconURL: userProfileURL});
+		const userEmbed = new MessageEmbed(serverEmbed).setTitle('User Avatar').setImage(userProfileURL).setAuthor({name: `${guildUser.user.tag}`, iconURL: userProfileURL});
 		
 		if(serverProfileURL) {
 			await interaction.reply({

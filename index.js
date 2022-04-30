@@ -15,6 +15,7 @@ require('dotenv').config();
 const token = process.env.TOKEN;
 const client = new Client({ intents: 131071 });
 
+module.exports.client = client;
 
 const eventFiles = fs.readdirSync('./events').filter(file => file.endsWith('.js'));
 
@@ -26,5 +27,6 @@ for (const file of eventFiles) {
 		client.on(event.name, (...args) => event.execute(...args));
 	}
 }
+
 
 client.login(token);
