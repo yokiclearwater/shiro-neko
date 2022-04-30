@@ -1,9 +1,7 @@
 
 const fetch = require('node-fetch');
 
-module.exports = async function() {
-	const url = "https://api.quotable.io/random";
-
+module.exports = async function(url) {
 	const response = await fetch(url);
 	
 	var data = await response.json();

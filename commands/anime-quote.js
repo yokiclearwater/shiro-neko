@@ -2,15 +2,15 @@ const { SlashCommandBuilder, quote } = require('@discordjs/builders');
 
 module.exports = {
 	data: new SlashCommandBuilder()
-		.setName('quote')
-		.setDescription('Show Random Quote'),
+		.setName('anime-quote')
+		.setDescription('Show Anime Quote'),
 	async execute(interaction) {
-		const url = "https://api.quotable.io/random";
+		const url = "https://animechan.vercel.app/api/random";
         var data = require('../api/quoteJSON');
         const dataJSON = await data(url);
 
 
-		await interaction.reply(`${dataJSON.content} - **${dataJSON.author}**`);
+		await interaction.reply(`${dataJSON.quote} - **${dataJSON.character}** (*${dataJSON.anime}*)`);
 	},
 };
 
