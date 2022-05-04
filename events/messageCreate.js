@@ -10,15 +10,6 @@ module.exports = {
 	async execute(message) {
 		if(message.author.bot) return;
 
-        const attachment = new MessageAttachment('https://media.discordapp.net/attachments/960927762691022949/969660968818864128/stsmall507x507-pad600x600f8f8f8.jpg');
-        if(message.mentions.has(client.user)) {
-            await timeout(1500);
-            message.reply({
-                content: `${message.author}${message.author}${message.author}, Uno Reverse`,
-                files: [attachment]
-            });
-        }
-
         const clientInfo = await client.application.fetch();
         if(message.content.startsWith("$annoy") && (message.author.id === clientInfo.owner.id)) {
             const firstMention = message.mentions.users.first();
