@@ -15,19 +15,23 @@ for (const file of commandFiles) {
 module.exports = {
 	name: 'interactionCreate',
 	async execute(interaction) {
-		console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
-        if (!interaction.isCommand()) return;
+		if(interaction.inGuild()) {
+			console.log(`${interaction.user.tag} in #${interaction.channel.name} triggered an interaction.`);
+        	if (!interaction.isCommand()) return;
 
-	    const command = client.commands.get(interaction.commandName);
-        
-	    if (!command) return;
+	    	const command = client.commands.get(interaction.commandName);
+			
+	    	if (!command) return;
 
-	    try {
-	    	await command.execute(interaction);
-	    }
-	    catch (error) {
-	    	console.error(error);
-	    	await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
-	    }
+	    	try {
+	    		await command.execute(interaction);
+	    	}
+	    	catch (error) {
+	    		console.error(error);
+	    		await interaction.reply({ content: 'There was an error while executing this command!', ephemeral: true });
+	    	}
+		} else {
+			interaction.reply('Commands Only Worked in Servers');
+		}
     },
 };
