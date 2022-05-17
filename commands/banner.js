@@ -11,7 +11,7 @@ module.exports = {
 		const normalUser = interaction.options.getUser('user') || interaction.user;
 
         const fetchUser = await normalUser.fetch(true);
-        const userProfileURL = fetchUser.bannerURL({dynamic: true, size: 1024})
+        const userProfileURL = fetchUser.bannerURL({format: 'png', dynamic: true, size: 1024})
 
 		const highestRoleColor = guildUser.roles.highest.color;
         

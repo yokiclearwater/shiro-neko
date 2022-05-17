@@ -11,8 +11,9 @@ module.exports = {
 		const normalUser = interaction.options.getUser('user') || interaction.user;
 
 		const highestRoleColor = guildUser.roles.highest.color;
-		const serverProfileURL = guildUser.avatarURL({dynamic: true, size: 512});
-		const userProfileURL = normalUser.avatarURL({dynamic: true, size: 512});
+		const serverProfileURL = guildUser.avatarURL({format: 'png', dynamic: true, size: 512});
+		const userProfileURL = normalUser.avatarURL({format: 'png', dynamic: true, size: 512});
+		// console.log(normalUser.avatarURL({format: 'png', size: 512}))
 		const serverEmbed = new MessageEmbed({
 			title: "Server Avatar",
 			color: highestRoleColor,
