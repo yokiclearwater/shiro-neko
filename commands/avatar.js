@@ -10,13 +10,13 @@ module.exports = {
 		const guildUser = interaction.options.getMember('user') || interaction.member; 
 		const normalUser = interaction.options.getUser('user') || interaction.user;
 
-		const highestRoleColor = guildUser.roles.highest.color;
+		const displayUserColor = guildUser.displayColor;
 		const serverProfileURL = guildUser.avatarURL({format: 'png', dynamic: true, size: 512});
 		const userProfileURL = normalUser.avatarURL({format: 'png', dynamic: true, size: 512});
 		// console.log(normalUser.avatarURL({format: 'png', size: 512}))
 		const serverEmbed = new MessageEmbed({
 			title: "Server Avatar",
-			color: highestRoleColor,
+			color: displayUserColor,
 			author: {
 				name: `${guildUser.user.tag}`,
 				icon_url: serverProfileURL,
@@ -25,7 +25,7 @@ module.exports = {
 				url: serverProfileURL,
 			}
 		})
-		const userEmbed = new MessageEmbed(serverEmbed).setTitle('User Avatar').setImage(userProfileURL).setAuthor({name: `${guildUser.user.tag}`, iconURL: userProfileURL});
+		const userEmbed = new MessageEmbed(serverEmbed).setTitle('User Avatar').setImage(userProfileURL).setAuthor({name: `${guildUser.user.tag}`, iconURL: userProfileURL}).setColor(displayUserColor);
 		
 		if(serverProfileURL) {
 			await interaction.reply({

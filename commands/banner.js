@@ -13,12 +13,12 @@ module.exports = {
         const fetchUser = await normalUser.fetch(true);
         const userProfileURL = fetchUser.bannerURL({format: 'png', dynamic: true, size: 1024})
 
-		const highestRoleColor = guildUser.roles.highest.color;
+		const displayUserColor = guildUser.displayColor;
         
         if(userProfileURL) {
             const serverEmbed = new MessageEmbed({
                 title: "User Banner",
-                color: highestRoleColor,
+                color: displayUserColor,
                 author: {
                     name: `${guildUser.user.tag}`,
                     icon_url: `${normalUser.avatarURL({dynamic: true})}`,
